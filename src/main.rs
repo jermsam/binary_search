@@ -16,13 +16,14 @@ fn binary_search (list:&[i8; 10], target: &i8){
     let mut index:  Option<i8> =  None;
     while first <= last {
         let  midpoint = (first + last) / 2;
-        if  *target == list[midpoint]  {
+        if *target < list[midpoint as usize] {
+            last = (midpoint - 1) as usize;
+        } else if  *target > list[midpoint]  {
+            first = (midpoint + 1) as usize;
+        }
+        else {
             index = Some(midpoint as i8);
             break
-        } else if target < &list[midpoint as usize] {
-            last = (midpoint - 1) as usize;
-        } else {
-            first = (midpoint + 1) as usize;
         }
     }
 
